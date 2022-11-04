@@ -1,6 +1,8 @@
+require 'sanitize'
+
 class HtmlGenerator
   def generate_html(content, bypass_html = true, file_name = 'index.html')
-    content = content.gsub(/[<>]/, '') if bypass_html
+    content = Sanitize.fragment(content) unless bypass_html
 
     html = <<-HTML
     <!DOCTYPE html>
